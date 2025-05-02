@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router';
-import { auth } from '../firebase.init';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { AuthContext } from '../context/AuthContext';
+// import { auth } from '../firebase.init';
+// import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Signup = () => {
+
+  const {createUser} = use(AuthContext)
+  // console.log(createUser);
 
     const [showPass, setShowPass] = useState(false)
 
@@ -17,12 +21,20 @@ const Signup = () => {
         const name = e.target.name.value;
         console.log(email, password, name);
 
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(result => {
-            console.log(result);
+        // createUserWithEmailAndPassword(auth, email, password)
+        // .then(result => {
+        //     console.log(result);
+        // })
+        // .catch(error=>{
+        //     console.log(error.message);
+        // })
+
+        createUser(email, password)
+        .than(result => {
+          console.log(result);
         })
-        .catch(error=>{
-            console.log(error.message);
+        .catch(error => {
+          console.log(error);
         })
 
 
