@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { auth } from '../firebase.init';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { AuthContext } from '../context/AuthContext';
+// import { auth } from '../firebase.init';
+// import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
+
+  const {logInUser} = use(AuthContext)
+  // console.log(logInUser);
 
     const [showPass, setShowPass] = useState(false)
 
@@ -15,12 +19,20 @@ const Login = () => {
         const password = e.target.password.value;
         console.log(email, password);
 
-        signInWithEmailAndPassword(auth, email, password)
+        // signInWithEmailAndPassword(auth, email, password)
+        // .then(result => {
+        //     console.log(result);
+        // })
+        // .catch(error=>{
+        //     console.log(error.message);
+        // })
+
+        logInUser(email, password)
         .then(result => {
-            console.log(result);
+          console.log(result.user);
         })
-        .catch(error=>{
-            console.log(error.message);
+        .catch(error => {
+          console.log(error);
         })
 
 
