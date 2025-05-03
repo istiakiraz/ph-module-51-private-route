@@ -1,5 +1,5 @@
 import React, { use, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext';
 // import { auth } from '../firebase.init';
@@ -8,10 +8,12 @@ import { AuthContext } from '../context/AuthContext';
 const Login = () => {
 
   const {logInUser} = use(AuthContext)
+  const location = useLocation()
   
   // console.log(logInUser);
 
     const [showPass, setShowPass] = useState(false)
+    const navigate =useNavigate()
 
     const handleLogIn =(e)=>{
         e.preventDefault();
@@ -31,6 +33,7 @@ const Login = () => {
         logInUser(email, password)
         .then(result => {
           console.log(result.user);
+          navigate( location.state || '/')
         })
         .catch(error => {
           console.log(error);

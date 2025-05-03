@@ -45,6 +45,13 @@ const handleSignOut =()=>{
           Sign Up
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-red-500" : "")}
+          to="/dashboard">
+          DashBoard
+        </NavLink>
+      </li>
       <>
       {
         user && <li>
