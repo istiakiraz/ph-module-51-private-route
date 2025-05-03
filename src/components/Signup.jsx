@@ -8,6 +8,7 @@ import { AuthContext } from '../context/AuthContext';
 const Signup = () => {
 
   const {createUser} = use(AuthContext)
+  
   // console.log(createUser);
 
     const [showPass, setShowPass] = useState(false)
@@ -30,7 +31,7 @@ const Signup = () => {
         // })
 
         createUser(email, password)
-        .than(result => {
+        .then(result => {
           console.log(result);
         })
         .catch(error => {
